@@ -1,0 +1,23 @@
+@import './ownStyles/null.scss';
+
+.appWrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    min-height: 100vh;
+
+    display: grid;
+    grid-template-areas:
+        'header header'
+        'navbar content'
+        'footer footer';
+
+    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 60px 1fr 60px;
+    gap: 10px;
+
+    & .content {
+        grid-area: content;
+        background-color: lightblue;
+    }
+}

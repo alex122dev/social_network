@@ -1,0 +1,39 @@
+.profileImage {
+    width: 200px;
+    height: 200px;
+    position: relative;
+
+    img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+}
+
+.infoItem {
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.contactsList {
+    padding-left: 30px;
+}
+
+.contactsItem {
+    &:not(:last-child) {
+        margin-bottom: 5px;
+    }
+}
+
+.formTextarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+.errorMessage {
+    border: 1px solid red;
+    color: red;
+}

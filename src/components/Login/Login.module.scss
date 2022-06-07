@@ -1,0 +1,24 @@
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.loginItem {
+    margin-bottom: 15px;
+}
+
+.loginInput {
+    &:not(:last-child) {
+        margin-bottom: 5px;
+    }
+}
+
+.requestError {
+    border: 1px solid red;
+    padding: 5px;
+}
+
+.captchaImage {
+    margin-bottom: 5px;
+}

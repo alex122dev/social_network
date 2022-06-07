@@ -1,0 +1,25 @@
+.navbar {
+    background-color: pink;
+    grid-area: navbar;
+
+    padding: 10px;
+
+
+    & .menu {}
+}
+
+.menuItem {
+
+    &:not(:last-child) {
+        margin-bottom: 5px;
+    }
+}
+
+.menuLink {
+    color: #fff;
+    transition: all 0.3s ease 0s;
+}
+
+.menuLinkActive {
+    color: gold;
+}
