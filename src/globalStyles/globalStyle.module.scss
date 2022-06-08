@@ -8,4 +8,8 @@
     padding: 5px 15px;
     background-color: #fff;
     border: 2px solid grey;
+
+    &:disabled {
+        background-color: grey;
+    }
 }

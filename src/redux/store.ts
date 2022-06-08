@@ -3,12 +3,14 @@ import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
 import appReducer from "./app-reducer";
 import authReducer from "./auth-reducer";
 import profileReducer from "./profile-reducer";
+import usersReducer from "./users-reducer";
 
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     auth: authReducer,
-    app: appReducer
+    app: appReducer,
+    usersPage: usersReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>

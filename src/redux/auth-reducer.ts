@@ -1,5 +1,5 @@
 import { ResultCodeEnum, ResultCodeWithCaptchaEnum } from "../api/api"
-import { authAPI, AuthDataType } from "../api/api-auth"
+import { authAPI, AuthDataType } from "../api/authAPI"
 import { BaseThunkType, InferActionsTypes } from "./store"
 
 

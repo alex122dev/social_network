@@ -1,8 +1,11 @@
 import { Form, Formik } from "formik"
+import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
-import { ContactsType, ProfileType } from "../../api/api-profile"
+import { ContactsType, ProfileType, SetProfileDataType } from "../../api/profileAPI"
 import globalstyle from '../../globalStyles/globalStyle.module.scss'
+import { actions, saveProfile } from "../../redux/profile-reducer"
 import { selectorGetProfileErrorMessage, selectorGetProfileSavingSuccess } from "../../redux/profile-selectors"
+import { DispatchThunkType } from "../../redux/store"
 import { createField, CustomInputComponent, CustomTextareaComponent, GetStringKeys } from "../common/FormControls/FormControls"
 import style from './Profile.module.scss'
 
@@ -11,7 +14,6 @@ import style from './Profile.module.scss'
 type PropsType = {
     profile: ProfileType
     setEditMode: (value: boolean) => void
-    saveProfile: (profile: ProfileType) => void
 }
 
 type ProfileKeysType = GetStringKeys<ProfileType>
@@ -19,13 +21,15 @@ type ContactsKeysType = GetStringKeys<ContactsType>
 
 
 
-export const ProfileDataForm: React.FC<PropsType> = ({ profile, setEditMode, saveProfile }) => {
+export const ProfileDataForm: React.FC<PropsType> = ({ profile, setEditMode }) => {
 
     const errorMessage = useSelector(selectorGetProfileErrorMessage)
-    const savingSuccess = useSelector(selectorGetProfileSavingSuccess)
-    /* const formInitialValues = {
+    //const savingSuccess = useSelector(selectorGetProfileSavingSuccess)
+    const dispatch: DispatchThunkType = useDispatch()
+
+    //* for situations when server return value of properties null, where must to be string
+    const formInitialValues = {
         aboutMe: profile.aboutMe || '',
-        //userId: number,
         lookingForAJob: profile.lookingForAJob,
         lookingForAJobDescription: profile.lookingForAJobDescription || '',
         fullName: profile.fullName || '',
@@ -39,23 +43,29 @@ export const ProfileDataForm: React.FC<PropsType> = ({ profile, setEditMode, sav
             youtube: profile.contacts.youtube || '',
             mainLink: profile.contacts.mainLink || ''
         },
-    } */
+    }
 
-    /* if (savingSuccess) {
-        setEditMode(!savingSuccess)
-    } */
+    const backHandler = () => {
+        setEditMode(false)
+        dispatch(actions.setErrorMessage(null))
+    }
+
+    const saveProfileCallback = (profile: SetProfileDataType) => {
+        dispatch(saveProfile(profile))
+    }
+
 
     return <Formik
-        initialValues={profile}
+        initialValues={formInitialValues}
         onSubmit={(values) => {
             console.log(values);
-            saveProfile(values)
-            setEditMode(false)
+            saveProfileCallback(values)
+            //setEditMode(false)
         }}
     >
         <Form>
             <button className={globalstyle.btn} type='submit'>save changes</button>
-            <button className={globalstyle.btn} type='button' onClick={() => setEditMode(false)}>back</button>
+            <button className={globalstyle.btn} type='button' onClick={backHandler}>back</button>
 
             {errorMessage && <div className={style.errorMessage}>{errorMessage}</div>}
 

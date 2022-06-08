@@ -1,0 +1,35 @@
+.paginator {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.page {
+    font-size: 18px;
+    padding: 2px 3px 0px 3px;
+    background-color: lightgrey;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+.activePage {
+    font-weight: 700;
+    background-color: lemonchiffon;
+}
+
+.changeBtn {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    color: #fff;
+    background-color: lightseagreen;
+    transition: all 0.3s ease 0s;
+
+    @media (any-hover: hover) {
+        &:hover {
+            background-color: orange;
+        }
+    }
+}

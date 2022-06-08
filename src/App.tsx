@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { Preloader } from './components/common/Preloader/Preloader';
 import { selectorGetInitialized } from './redux/app-selectors';
 import { setUserInitialized } from './redux/app-reducer';
+import { UsersPage } from './components/Users/UsersPage';
 
 function App() {
 
@@ -39,7 +40,10 @@ function App() {
       <div className='content'>
         <Routes>
           <Route path='/login' element={<Login />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile' element={<Profile />}>
+            <Route path=':userId' element={<Profile />} />
+          </Route>
+          <Route path='/users' element={<UsersPage />} />
           <Route path='/' element={<Navigate to='/profile' />} />
         </Routes>
       </div>

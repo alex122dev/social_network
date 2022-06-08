@@ -12,3 +12,7 @@ export const selectorGetProfileErrorMessage = (state: AppStateType) => {
 export const selectorGetProfileSavingSuccess = (state: AppStateType) => {
     return state.profilePage.savingSuccess
 }
+
+export const selectorGetProfileEditMode = (state: AppStateType) => {
+    return state.profilePage.editMode
+}

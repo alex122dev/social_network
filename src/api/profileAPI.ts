@@ -1,4 +1,3 @@
-import axios from "axios"
 import { BaseResponseType, instance } from "./api"
 
 export type ProfileType = {
@@ -12,19 +11,27 @@ export type ProfileType = {
 }
 
 export type ContactsType = {
-    github: string | null
-    vk: string | null
-    facebook: string | null
-    instagram: string | null
-    twitter: string | null
-    website: string | null
-    youtube: string | null
-    mainLink: string | null
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
 }
 
 export type PhotosType = {
     small: string | null
     large: string | null
+}
+
+export type SetProfileDataType = {
+    aboutMe: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
 }
 
 
@@ -33,7 +40,7 @@ export const profileAPI = {
         return instance.get<ProfileType>('profile/' + userId)
             .then(res => res.data)
     },
-    setProfileData(profile: ProfileType) {
-        return instance.put<BaseResponseType>('profile/', profile).then(res => res.data)
+    setProfileData(profileData: SetProfileDataType) {
+        return instance.put<BaseResponseType>('profile/', profileData).then(res => res.data)
     }
 }
