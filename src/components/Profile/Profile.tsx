@@ -3,6 +3,7 @@ import { Navigate, useParams } from 'react-router-dom'
 import { selectorGetAuthUserId, selectorGetIsAuth } from '../../redux/auth-selectors'
 import style from './Profile.module.scss'
 import { ProfileInfo } from './ProfileInfo'
+import { ProfileStatus } from './ProfileStatus'
 
 
 
@@ -22,5 +23,6 @@ export const Profile: React.FC = () => {
 
     return <div className={style.profile}>
         <ProfileInfo userId={userId} isOwner={!params.userId} />
+        <ProfileStatus userId={userId} isOwner={!params.userId} />
     </div>
 }

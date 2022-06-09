@@ -12,6 +12,20 @@
     }
 }
 
+.previewImage {
+    width: 200px;
+    height: 200px;
+    position: relative;
+
+    img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+}
+
 .infoItem {
     &:not(:last-child) {
         margin-bottom: 10px;
@@ -36,4 +50,9 @@
 .errorMessage {
     border: 1px solid red;
     color: red;
+}
+
+.profileAvatarBlock {
+    display: flex;
+    column-gap: 15px;
 }

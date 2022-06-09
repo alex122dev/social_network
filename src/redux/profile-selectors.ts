@@ -16,3 +16,7 @@ export const selectorGetProfileSavingSuccess = (state: AppStateType) => {
 export const selectorGetProfileEditMode = (state: AppStateType) => {
     return state.profilePage.editMode
 }
+
+export const selectorGetProfileStatus = (state: AppStateType) => {
+    return state.profilePage.status
+}

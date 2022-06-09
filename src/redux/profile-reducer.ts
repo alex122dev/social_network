@@ -1,5 +1,5 @@
 import { ResultCodeEnum } from "../api/api"
-import { profileAPI, ProfileType, SetProfileDataType } from "../api/profileAPI"
+import { PhotosType, profileAPI, ProfileType, SetProfileDataType } from "../api/profileAPI"
 import { BaseThunkType, InferActionsTypes } from "./store"
 
 
@@ -7,7 +7,8 @@ let initialState = {
     profile: null as ProfileType | null,
     errorMessage: null as null | string,
     savingSuccess: false,
-    editMode: false
+    editMode: false,
+    status: ''
 }
 
 
@@ -34,6 +35,16 @@ const profileReducer = (state = initialState, action: ActionsType): InitialState
                 ...state,
                 editMode: action.editMode
             }
+        case 'SN/PROFILE/SAVE_PHOTO_RESULT':
+            return {
+                ...state,
+                profile: { ...state.profile, photos: action.photos } as ProfileType
+            }
+        case 'SN/PROFILE/SET_PROFILE_STATUS':
+            return {
+                ...state,
+                status: action.status
+            }
         default:
             return state
     }
@@ -43,7 +54,9 @@ export const actions = {
     setUserProfile: (profile: ProfileType) => ({ type: 'SN/PROFILE/SET_USER_PROFILE', profile } as const),
     setErrorMessage: (message: string | null) => ({ type: 'SN/PROFILE/SET_ERROR_MESSAGE', message } as const),
     setSavingSucces: (savingSuccess: boolean) => ({ type: 'SN/PROFILE/SET_SAVING_SUCCESS', savingSuccess } as const),
-    setEditMode: (editMode: boolean) => ({ type: 'SN/PROFILE/SET_EDIT_MODE', editMode } as const)
+    setEditMode: (editMode: boolean) => ({ type: 'SN/PROFILE/SET_EDIT_MODE', editMode } as const),
+    savePhotoResult: (photos: PhotosType) => ({ type: 'SN/PROFILE/SAVE_PHOTO_RESULT', photos } as const),
+    setProfileStatus: (status: string) => ({ type: 'SN/PROFILE/SET_PROFILE_STATUS', status } as const)
 }
 
 
@@ -72,6 +85,32 @@ export const saveProfile = (profileData: SetProfileDataType): ThunkType => async
     console.log(data);
 }
 
+export const savePhoto = (photo: File): ThunkType => async (dispatch) => {
+    const data = await profileAPI.setProfilePhoto(photo)
+    console.log(data);
+    if (data.resultCode === ResultCodeEnum.Success) {
+        dispatch(actions.savePhotoResult(data.data.photos))
+    }
+}
+
+export const getProfileStatus = (userId: number): ThunkType => async (dispatch) => {
+    const data = await profileAPI.getProfileStatus(userId)
+    console.log(data);
+    dispatch(actions.setProfileStatus(data))
+
+}
+
+export const saveProfileStatus = (status: string): ThunkType => async (dispatch) => {
+    try {
+        const data = await profileAPI.setProfileStatus(status)
+        //console.log(data);
+        if (data.resultCode === ResultCodeEnum.Success) {
+            dispatch(actions.setProfileStatus(status))
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 type InitialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof actions>

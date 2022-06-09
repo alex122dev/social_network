@@ -1,10 +1,8 @@
 import { Field, Form, Formik } from "formik"
 import React from "react"
 import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
 import globalStyle from '../../globalStyles/globalStyle.module.scss'
-import { DispatchThunkType } from "../../redux/store"
-import { FilterUsersType, getUsers } from "../../redux/users-reducer"
+import { FilterUsersType } from "../../redux/users-reducer"
 import { selectorGetUsersFilter } from "../../redux/users-selector"
 import style from './Users.module.scss'
 
@@ -16,13 +14,13 @@ type PropsType = {
 export const UsersSearchForm: React.FC<PropsType> = React.memo(({ onFilterChanged }) => {
 
     const filter = useSelector(selectorGetUsersFilter)
-    //console.log('render');
+    //console.log('UsersSearchForm render');
 
     return <Formik
         enableReinitialize={true}
         initialValues={filter}
         onSubmit={(values, { setSubmitting }) => {
-            console.log('formData filter: ', values);
+            //console.log('formData filter: ', values);
             onFilterChanged(values)
             setSubmitting(false)
         }}>

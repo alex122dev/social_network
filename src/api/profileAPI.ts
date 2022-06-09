@@ -34,6 +34,9 @@ export type SetProfileDataType = {
     contacts: ContactsType
 }
 
+export type RequestPhotosData = {
+    photos: PhotosType
+}
 
 export const profileAPI = {
     getProfile(userId: number) {
@@ -42,5 +45,20 @@ export const profileAPI = {
     },
     setProfileData(profileData: SetProfileDataType) {
         return instance.put<BaseResponseType>('profile/', profileData).then(res => res.data)
+    },
+    setProfilePhoto(photo: File) {
+        const formData = new FormData()
+        formData.append('image', photo)
+        return instance.put<BaseResponseType<RequestPhotosData>>('profile/photo', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(res => res.data)
+    },
+    setProfileStatus(status: string) {
+        return instance.put<BaseResponseType>('profile/status', { status }).then(res => res.data)
+    },
+    getProfileStatus(userId: number) {
+        return instance.get<string>(`profile/status/${userId}`).then(res => res.data)
     }
 }

@@ -6,10 +6,11 @@ import { selectorGetProfileEditMode, selectorGetUserProfile } from "../../redux/
 import { DispatchThunkType } from "../../redux/store"
 import { Preloader } from "../common/Preloader/Preloader"
 import photoPlaceholder from '../../assets/img/user-image.png'
-import style from './Profile.module.scss'
 import { ProfileInfoData } from "./ProfileInfoData"
 import { ProfileDataForm } from "./ProfileDataForm"
-import { ProfileType, SetProfileDataType } from "../../api/profileAPI"
+import globalStyles from '../../globalStyles/globalStyle.module.scss'
+import style from './Profile.module.scss'
+import { ProfileAvatar } from "./ProfileAvatatar"
 
 type PropsType = {
     userId: number
@@ -44,9 +45,7 @@ export const ProfileInfo: React.FC<PropsType> = ({ userId, isOwner }) => {
 
     return (
         <div className={style.profileInfo}>
-            <div className={style.profileImage}>
-                <img src={profile.photos.large || photoPlaceholder} alt="avatar" />
-            </div>
+            <ProfileAvatar isOwner={isOwner} />
             {!editMode
                 ? <ProfileInfoData profile={profile} setEditMode={setEditMode} isOwner={isOwner} />
                 : <ProfileDataForm profile={profile} setEditMode={setEditMode} />
