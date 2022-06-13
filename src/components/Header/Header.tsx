@@ -5,6 +5,7 @@ import globalstyle from '../../globalStyles/globalStyle.module.scss'
 import { DispatchThunkType } from '../../redux/store'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/auth-reducer'
+import { Link } from 'react-router-dom'
 
 
 type PropsType = {
@@ -19,8 +20,9 @@ export const Header: React.FC<PropsType> = () => {
 
     const logoutCallback = () => {
         dispatch(logout())
-        console.log(1);
+        //console.log(1);
     }
+
 
     return (
         <header className={style.header}>
@@ -32,7 +34,7 @@ export const Header: React.FC<PropsType> = () => {
                         <button className={globalstyle.btn} onClick={logoutCallback}>Log out</button>
                     </>
                     : <>
-                        <button type='button' className={globalstyle.btn}>Login</button>
+                        <Link to={'/login'}><button type='button' className={globalstyle.btn}>Login</button></Link>
                     </>}
             </div>
         </header>
