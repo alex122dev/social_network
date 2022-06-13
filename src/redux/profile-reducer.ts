@@ -95,7 +95,7 @@ export const savePhoto = (photo: File): ThunkType => async (dispatch) => {
 
 export const getProfileStatus = (userId: number): ThunkType => async (dispatch) => {
     const data = await profileAPI.getProfileStatus(userId)
-    console.log(data);
+    //console.log(data);
     dispatch(actions.setProfileStatus(data))
 
 }

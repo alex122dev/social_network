@@ -2,6 +2,7 @@ import { Action, AnyAction, applyMiddleware, combineReducers, compose, createSto
 import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
 import appReducer from "./app-reducer";
 import authReducer from "./auth-reducer";
+import chatReducer from "./chat-reducer";
 import profileReducer from "./profile-reducer";
 import usersReducer from "./users-reducer";
 
@@ -10,7 +11,8 @@ const rootReducer = combineReducers({
     profilePage: profileReducer,
     auth: authReducer,
     app: appReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    chat: chatReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>

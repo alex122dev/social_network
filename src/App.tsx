@@ -14,6 +14,7 @@ import { Preloader } from './components/common/Preloader/Preloader';
 import { selectorGetInitialized } from './redux/app-selectors';
 import { setUserInitialized } from './redux/app-reducer';
 import { UsersPage } from './components/Users/UsersPage';
+import { ChatPage } from './components/ChatPage/ChatPage';
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
             <Route path=':userId' element={<Profile />} />
           </Route>
           <Route path='/users' element={<UsersPage />} />
+          <Route path='/chat' element={<ChatPage />} />
           <Route path='/' element={<Navigate to='/profile' />} />
         </Routes>
       </div>
